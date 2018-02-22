@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<schema>
+	<tables>
+		<table>
+			<name>vtiger_calls</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_calls` (
+  `callsid` int(19) NOT NULL,
+  `uuid` varchar(255) DEFAULT NULL,
+  `call_start` varchar(255) DEFAULT NULL,
+  `direction` varchar(255) DEFAULT NULL,
+  `caller_phone` varchar(255) DEFAULT NULL,
+  `callerid` varchar(255) DEFAULT NULL,
+  `dst_phone` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `duration_time` varchar(255) DEFAULT NULL,
+  `answered_time` varchar(255) DEFAULT NULL,
+  `recording_url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`callsid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_callscf</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_callscf` (
+  `callsid` int(19) NOT NULL,
+  `tags` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`callsid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+		<table>
+			<name>vtiger_calls_user_field</name>
+			<sql><![CDATA[CREATE TABLE `vtiger_calls_user_field` (
+  `recordid` int(25) NOT NULL,
+  `userid` int(25) NOT NULL,
+  `starred` varchar(100) DEFAULT NULL,
+  KEY `fk_callsid_vtiger_calls_user_field` (`recordid`),
+  CONSTRAINT `fk_callsid_vtiger_calls_user_field` FOREIGN KEY (`recordid`) REFERENCES `vtiger_calls` (`callsid`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+		</table>
+	</tables>
+</schema>

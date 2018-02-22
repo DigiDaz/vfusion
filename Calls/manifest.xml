@@ -1,0 +1,951 @@
+<?xml version='1.0'?>
+<module>
+<exporttime>2018-02-21 16:54:27</exporttime>
+<name>Calls</name>
+<label>Calls</label>
+<parent>Tools</parent>
+<dependencies>
+<vtiger_version>7.0.1</vtiger_version>
+</dependencies>
+<tables>
+<table>
+<name>vtiger_calls</name>
+<sql><![CDATA[CREATE TABLE `vtiger_calls` (
+  `callsid` int(19) NOT NULL,
+  `uuid` varchar(255) DEFAULT NULL,
+  `call_start` varchar(255) DEFAULT NULL,
+  `direction` varchar(255) DEFAULT NULL,
+  `caller_phone` varchar(255) DEFAULT NULL,
+  `callerid` varchar(255) DEFAULT NULL,
+  `dst_phone` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `duration_time` varchar(255) DEFAULT NULL,
+  `answered_time` varchar(255) DEFAULT NULL,
+  `recording_url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`callsid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+</table>
+<table>
+<name>vtiger_callscf</name>
+<sql><![CDATA[CREATE TABLE `vtiger_callscf` (
+  `callsid` int(19) NOT NULL,
+  `tags` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`callsid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+</table>
+<table>
+<name>vtiger_calls_user_field</name>
+<sql><![CDATA[CREATE TABLE `vtiger_calls_user_field` (
+  `recordid` int(25) NOT NULL,
+  `userid` int(25) NOT NULL,
+  `starred` varchar(100) DEFAULT NULL,
+  KEY `fk_callsid_vtiger_calls_user_field` (`recordid`),
+  CONSTRAINT `fk_callsid_vtiger_calls_user_field` FOREIGN KEY (`recordid`) REFERENCES `vtiger_calls` (`callsid`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8]]></sql>
+</table>
+</tables>
+<blocks>
+<block>
+<label>LBL_CALLS_INFORMATION</label>
+<fields>
+<field>
+<fieldname>uuid</fieldname>
+<uitype>2</uitype>
+<columnname>uuid</columnname>
+<tablename>vtiger_calls</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>Uuid</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>1</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>V~M</typeofdata>
+<quickcreate>1</quickcreate>
+<quickcreatesequence>0</quickcreatesequence>
+<displaytype>1</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>1</masseditable>
+<summaryfield>0</summaryfield>
+<entityidentifier>
+<entityidfield>callsid</entityidfield>
+<entityidcolumn>callsid</entityidcolumn>
+</entityidentifier>
+</field>
+<field>
+<fieldname>assigned_user_id</fieldname>
+<uitype>53</uitype>
+<columnname>smownerid</columnname>
+<tablename>vtiger_crmentity</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>Assigned To</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>2</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>V~M</typeofdata>
+<quickcreate>1</quickcreate>
+<quickcreatesequence>0</quickcreatesequence>
+<displaytype>1</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>1</masseditable>
+<summaryfield>0</summaryfield>
+</field>
+<field>
+<fieldname>createdtime</fieldname>
+<uitype>70</uitype>
+<columnname>createdtime</columnname>
+<tablename>vtiger_crmentity</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>Created Time</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>3</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>T~O</typeofdata>
+<quickcreate>1</quickcreate>
+<quickcreatesequence>0</quickcreatesequence>
+<displaytype>2</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>1</masseditable>
+<summaryfield>0</summaryfield>
+</field>
+<field>
+<fieldname>modifiedtime</fieldname>
+<uitype>70</uitype>
+<columnname>modifiedtime</columnname>
+<tablename>vtiger_crmentity</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>Modified Time</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>4</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>T~O</typeofdata>
+<quickcreate>1</quickcreate>
+<quickcreatesequence>0</quickcreatesequence>
+<displaytype>2</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>1</masseditable>
+<summaryfield>0</summaryfield>
+</field>
+<field>
+<fieldname>direction</fieldname>
+<uitype>16</uitype>
+<columnname>direction</columnname>
+<tablename>vtiger_calls</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>direction</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>6</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>V~O</typeofdata>
+<quickcreate>1</quickcreate>
+<quickcreatesequence>0</quickcreatesequence>
+<displaytype>1</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>1</masseditable>
+<summaryfield>0</summaryfield>
+<picklistvalues>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+<picklistvalue>inbound</picklistvalue>
+<picklistvalue>outbound</picklistvalue>
+<picklistvalue>local</picklistvalue>
+</picklistvalues>
+</field>
+<field>
+<fieldname>CallerPhone</fieldname>
+<uitype>11</uitype>
+<columnname>caller_phone</columnname>
+<tablename>vtiger_calls</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>CallerPhone</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>7</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>V~O</typeofdata>
+<quickcreate>1</quickcreate>
+<quickcreatesequence>0</quickcreatesequence>
+<displaytype>1</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>1</masseditable>
+<summaryfield>0</summaryfield>
+</field>
+<field>
+<fieldname>Caller</fieldname>
+<uitype>10</uitype>
+<columnname>callerid</columnname>
+<tablename>vtiger_calls</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>Caller</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>8</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>V~O</typeofdata>
+<quickcreate>1</quickcreate>
+<quickcreatesequence>0</quickcreatesequence>
+<displaytype>1</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>1</masseditable>
+<summaryfield>0</summaryfield>
+<relatedmodules>
+<relatedmodule>Contacts</relatedmodule>
+</relatedmodules>
+</field>
+<field>
+<fieldname>ReplierPhone</fieldname>
+<uitype>11</uitype>
+<columnname>dst_phone</columnname>
+<tablename>vtiger_calls</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>ReplierPhone</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>9</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>V~O</typeofdata>
+<quickcreate>1</quickcreate>
+<quickcreatesequence>0</quickcreatesequence>
+<displaytype>1</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>1</masseditable>
+<summaryfield>0</summaryfield>
+</field>
+<field>
+<fieldname>callstatus</fieldname>
+<uitype>16</uitype>
+<columnname>status</columnname>
+<tablename>vtiger_calls</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>callstatus</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>10</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>V~O</typeofdata>
+<quickcreate>1</quickcreate>
+<quickcreatesequence>0</quickcreatesequence>
+<displaytype>1</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>1</masseditable>
+<summaryfield>0</summaryfield>
+<picklistvalues>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+<picklistvalue>answered</picklistvalue>
+<picklistvalue>no answer</picklistvalue>
+<picklistvalue>busy</picklistvalue>
+<picklistvalue>failed</picklistvalue>
+</picklistvalues>
+</field>
+<field>
+<fieldname>DurationTime</fieldname>
+<uitype>1</uitype>
+<columnname>duration_time</columnname>
+<tablename>vtiger_calls</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>DurationTime</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>11</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>V~O</typeofdata>
+<quickcreate>1</quickcreate>
+<quickcreatesequence>0</quickcreatesequence>
+<displaytype>1</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>1</masseditable>
+<summaryfield>0</summaryfield>
+</field>
+<field>
+<fieldname>AnsweredTime</fieldname>
+<uitype>1</uitype>
+<columnname>answered_time</columnname>
+<tablename>vtiger_calls</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>AnsweredTime</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>12</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>V~O</typeofdata>
+<quickcreate>1</quickcreate>
+<quickcreatesequence>0</quickcreatesequence>
+<displaytype>1</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>1</masseditable>
+<summaryfield>0</summaryfield>
+</field>
+<field>
+<fieldname>RecordingUrl</fieldname>
+<uitype>17</uitype>
+<columnname>recording_url</columnname>
+<tablename>vtiger_calls</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>RecordingUrl</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>13</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>V~O</typeofdata>
+<quickcreate>1</quickcreate>
+<quickcreatesequence>0</quickcreatesequence>
+<displaytype>1</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>1</masseditable>
+<summaryfield>0</summaryfield>
+</field>
+<field>
+<fieldname>CallStart</fieldname>
+<uitype>70</uitype>
+<columnname>call_start</columnname>
+<tablename>vtiger_calls</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>CallStart</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>14</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>DT~O</typeofdata>
+<quickcreate>1</quickcreate>
+<quickcreatesequence>0</quickcreatesequence>
+<displaytype>1</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>1</masseditable>
+<summaryfield>0</summaryfield>
+</field>
+<field>
+<fieldname>source</fieldname>
+<uitype>1</uitype>
+<columnname>source</columnname>
+<tablename>vtiger_crmentity</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>Source</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>15</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>V~O</typeofdata>
+<quickcreate>3</quickcreate>
+<quickcreatesequence>1</quickcreatesequence>
+<displaytype>2</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>0</masseditable>
+<summaryfield>0</summaryfield>
+</field>
+<field>
+<fieldname>tags</fieldname>
+<uitype>1</uitype>
+<columnname>tags</columnname>
+<tablename>vtiger_callscf</tablename>
+<generatedtype>1</generatedtype>
+<fieldlabel>tags</fieldlabel>
+<readonly>1</readonly>
+<presence>2</presence>
+<defaultvalue></defaultvalue>
+<sequence>16</sequence>
+<maximumlength>100</maximumlength>
+<typeofdata>V~O</typeofdata>
+<quickcreate>3</quickcreate>
+<quickcreatesequence>2</quickcreatesequence>
+<displaytype>6</displaytype>
+<info_type>BAS</info_type>
+<helpinfo><![CDATA[]]></helpinfo>
+<masseditable>0</masseditable>
+<summaryfield>0</summaryfield>
+</field>
+</fields>
+</block>
+<block>
+<label>LBL_CUSTOM_INFORMATION</label>
+</block>
+</blocks>
+<customviews>
+<customview>
+<viewname>Default</viewname>
+<setdefault>true</setdefault>
+<setmetrics>false</setmetrics>
+<fields>
+<field>
+<fieldname>createdtime</fieldname>
+<columnindex>1</columnindex>
+</field>
+<field>
+<fieldname>direction</fieldname>
+<columnindex>2</columnindex>
+</field>
+<field>
+<fieldname>CallerPhone</fieldname>
+<columnindex>3</columnindex>
+</field>
+<field>
+<fieldname>Caller</fieldname>
+<columnindex>4</columnindex>
+</field>
+<field>
+<fieldname>ReplierPhone</fieldname>
+<columnindex>5</columnindex>
+</field>
+<field>
+<fieldname>callstatus</fieldname>
+<columnindex>6</columnindex>
+</field>
+<field>
+<fieldname>DurationTime</fieldname>
+<columnindex>7</columnindex>
+</field>
+<field>
+<fieldname>AnsweredTime</fieldname>
+<columnindex>8</columnindex>
+</field>
+<field>
+<fieldname>RecordingUrl</fieldname>
+<columnindex>9</columnindex>
+</field>
+</fields>
+</customview>
+</customviews>
+<sharingaccess>
+<default>public_readwritedelete</default>
+</sharingaccess>
+<actions>
+<action>
+<name><![CDATA[Import]]></name>
+<status>enabled</status>
+</action>
+<action>
+<name><![CDATA[Export]]></name>
+<status>enabled</status>
+</action>
+<action>
+<name><![CDATA[Merge]]></name>
+<status>enabled</status>
+</action>
+</actions>
+<crons>
+</crons>
+</module>
