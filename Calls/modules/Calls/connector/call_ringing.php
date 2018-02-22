@@ -105,8 +105,7 @@
 	);
 
 	$response_json = json_encode($response);
-
-	header("Content-type: application/json");
+	
 	echo $response_json;
 
 ?>
