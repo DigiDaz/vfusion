@@ -11,3 +11,4 @@
 	else {
 		die("The connector properties file is missing!");
 	}
+?>

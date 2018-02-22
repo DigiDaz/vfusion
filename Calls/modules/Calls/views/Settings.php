@@ -32,3 +32,5 @@ class Calls_Settings_View extends Vtiger_List_View {
     }
     
 }
+
+?>

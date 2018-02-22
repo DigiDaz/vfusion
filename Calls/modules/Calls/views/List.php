@@ -43,3 +43,5 @@ class Calls_List_View extends Vtiger_List_View {
 		return $recordActions;
 	}
 }
+
+?>

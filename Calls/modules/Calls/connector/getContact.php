@@ -61,7 +61,6 @@
 		echo '{"error" : "Error logging into vtiger"}';
 	}
 
-
-	
-
 	$conn->close();
+
+?>

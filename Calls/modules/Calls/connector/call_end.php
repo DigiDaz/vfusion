@@ -57,7 +57,7 @@
 	//Create EntityManager to operate VTiger
 	$entityManager = new EntityManager($properties->{'vtiger_url'});
 
-	//Create DB manager to operate freeswitch DB
+	//Create DB manager to operate calls table
 	$DB = new DB($properties);
 
 	///Find call by uuid in VTiger and set Status 'ringing'\
@@ -74,7 +74,7 @@
 	else {
 		//Find call by uuid
 	
-		$sql = "SELECT * FROM " . $entityManager->callsModule . " WHERE uuid LIKE '" . $uuid . "';";
+		$sql = "SELECT * FROM " . $entityManager->callsModule . " WHERE uuid = '" . $uuid . "';";
 		$records = $entityManager->WSClient->doQuery($sql);
 
 		if($records) {
@@ -108,5 +108,5 @@
 
 	$response_json = json_encode($response);
 
-	header("Content-type: application/json");
 	echo $response_json;
+?>

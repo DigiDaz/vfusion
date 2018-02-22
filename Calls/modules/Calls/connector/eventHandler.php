@@ -69,3 +69,5 @@
 		$sql = "SELECT * FROM calls WHERE answered = 0 ORDER BY start_time;";
 		return $conn->query($sql);
 	}
+
+?>

@@ -33,3 +33,4 @@ if (isset($_POST)) {
 else {
     die("Invalid request!");
 }
+?>

@@ -67,3 +67,5 @@
 	else {
 		echo '{"error": "POST is empty!"}';
 	}
+
+?>

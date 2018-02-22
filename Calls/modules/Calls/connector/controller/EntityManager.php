@@ -21,15 +21,6 @@ class EntityManager
 		$this->WSClient = new Vtiger_WSClient($url);
 	}
 
-	// function addCall($data) {
-	// var_dump($data);
-
-	// 	$record = $this->WSClient->doCreate($this->callsModule, $data);
-	// 	if($record) {
- 	// 		$recordid = $this->WSClient->getRecordId($record['id']);
- 	// 	}
-	// }
-
 	function addCall($call) {
 		$record = $this->WSClient->doCreate($this->callsModule, $call);
 		if ($record) {
@@ -64,3 +55,5 @@ class EntityManager
 		}
 	}
 }
+
+?>

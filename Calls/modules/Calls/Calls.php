@@ -191,3 +191,5 @@ class Calls extends Vtiger_CRMEntity {
 	}
 
 }
+
+?>

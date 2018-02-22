@@ -19,3 +19,4 @@
 	else {
 		echo "Empty data sent!";
 	}
+?>

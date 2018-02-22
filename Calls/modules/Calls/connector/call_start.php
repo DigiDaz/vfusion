@@ -168,3 +168,5 @@
 
 	// header('Content-Type: application/json');
 	echo $response_json;
+
+?>
