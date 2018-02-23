@@ -9,7 +9,7 @@
  ************************************************************************************/
 include_once 'vtlib/Vtiger/Module.php';
 include_once 'modules/Vtiger/CRMEntity.php';
-include_once 'modules/Calls/connector/FusionLogger.php';
+// include_once 'modules/Calls/connector/FusionLogger.php';
 
 class Calls extends Vtiger_CRMEntity {
 	var $table_name = 'vtiger_calls';
